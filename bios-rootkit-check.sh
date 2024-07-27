@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 
 # Ensure efi-readvar is installed
 # The Affected device will have the
@@ -7,12 +6,12 @@ set -x
 # the affected device will also have 
 # "CN=DO NOT TRUST" or "CN=DO NOT SHIP" in the certifgate name (CN=)
 
+# PK (platform key) is in /sys/firmware/efi/efivar/
+grep -aqE 'DO NOT (TRUST|SHIP)' /sys/firmware/efi/efivars/PK*
 
-if ! command -v efi-readvar --help &> /dev/null; then
-  echo "efivar could not be found. Please install it first."
-  exit 1
+if [ $? -eq 1 ]; then
+  echo 'CVE-2024-41-43: Not found'
+else 
+  echo 'CVE-2024-41-43: FOUND !!!!!!!!!!'
 fi
 
-# Find the Platform Key (PK) variable
-
-sudo efi-readvar -v PK | grep -E "CN=DO NOT (TRUST|SHIP)"

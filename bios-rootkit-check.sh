@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Ensure efi-readvar is installed
 # The Affected device will have the
 # certificate serial number 55:fb:ef:87:81:23:00:84:47:17:0b:b3:cd:87:3a:f4
 # the affected device will also have 
